@@ -24,38 +24,39 @@ module Calculator =
         | "/" -> calcul (/) state
         | "*" -> calcul (*) state
         | s -> invalidOp <| sprintf "Agg: %s" s
+
     let calculate (st : string) = 
         st.Split([|' '|])
         |> Seq.fold agg []
         |> Seq.head
 
 type CalculatorShould () =
-    [<Test>]
-    member __.``Return 2 for expression '1 1 +'`` () =
-        "1 1 +"
+    [<TestCase("1 1 +")>]
+    member __.``Return 2 for expression '1 1 +'`` expression =
+        expression
         |> Calculator.calculate
         |> fun v -> Assert.AreEqual(2, v)
 
-    [<Test>]
-    member __.``Return 3 for expression '1 1 1 + +'`` () =
-        "1 1 1 + +"
+    [<TestCase("1 1 1 + +")>]
+    member __.``Return 3 for expression '1 1 1 + +'`` expression =
+        expression
         |> Calculator.calculate
         |> fun v -> Assert.AreEqual(3, v)
 
-    [<Test>]
-    member __.``Return 1 for expression '1 1 1 - +'`` () =
-        "1 1 1 - +"
+    [<TestCase("1 1 1 - +")>]
+    member __.``Return 1 for expression '1 1 1 - +'`` expression =
+        expression
         |> Calculator.calculate
         |> fun v -> Assert.AreEqual(1, v)
 
-    [<Test>]
-    member __.``Return 18 for expression '2 3 11 + 5 - *'`` () =
-        "2 3 11 + 5 - *"
+    [<TestCase("2 3 11 + 5 - *")>]
+    member __.``Return 18 for expression '2 3 11 + 5 - *'`` expression =
+        expression
         |> Calculator.calculate
         |> fun v -> Assert.AreEqual(18, v)
 
-    [<Test>]
-    member __.``Return 5 for expression '15 7 1 1 + - / 3 * 2 1 1 + + -'`` () =
-        "15 7 1 1 + - / 3 * 2 1 1 + + -"
+    [<TestCase("15 7 1 1 + - / 3 * 2 1 1 + + -")>]
+    member __.``Return 5 for expression '15 7 1 1 + - / 3 * 2 1 1 + + -'`` expression =
+        expression
         |> Calculator.calculate
         |> fun v -> Assert.AreEqual(5, v)
