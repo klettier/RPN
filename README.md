@@ -21,5 +21,5 @@
 
 ## CSharp
 
-* [Implementation](CSharp\src\Calculator\RPNCalculator.cs)
-* [Tests](CSharp\tests\Calculator.Tests\RPNCalculatorShould.cs)
+* [Implementation](CSharp/src/Calculator/RPNCalculator.cs)
+* [Tests](CSharp/tests/Calculator.Tests/RPNCalculatorShould.cs)
